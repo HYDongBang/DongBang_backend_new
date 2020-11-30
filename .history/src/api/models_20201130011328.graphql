@@ -1,0 +1,89 @@
+type User {
+  id: ID!
+  email: String!
+  encryptedPassword: String!
+  Name: String!
+  studentNumber: String!
+  phoneNumber: String!
+  university: String!
+  major: String!
+  isMaster: Club
+  notifications: [Notification]
+  applications: [Application]
+  rooms: [Room]
+  clubs: [Club]
+  auth: Boolean
+}
+type Club {
+  id: ID!
+  name: String!
+  bio: String!
+  description: String!
+  type: String!
+  master: User!
+  members: [User]
+  clubAddInfo: ClubAddInfo
+  clubImage: String
+  logoImage: String
+  questions: [Question]
+  applications: [Application]
+  application_description: String!
+  posts: [Post]
+}
+
+type ClubAddInfo {
+  id: ID!
+  Club: Club!
+  Party: Boolean
+  PartyDay: String
+  PhoneNumber: String
+  socialUrl: [String]
+  Union: Boolean
+  NumberOfMembers: Int
+  Email: String
+}
+
+type Room {
+  id: ID!
+  participants: [User!]!
+  messages: [Message!]!
+}
+
+type Message {
+  id: ID!
+  text: String!
+  from: User!
+  to: User!
+  room: Room!
+  created: DateTime!
+}
+
+type Question {
+  id: ID!
+  owner: Club!
+  subject: String
+  type: String
+  options: [String]
+}
+
+type Application {
+  id: ID!
+  user: User!
+  club: Club!
+  answer: [String]!
+  status: String
+  created: DateTime!
+}
+
+type Post {
+  id: ID!
+  title: String!
+  content: String!
+  user: User!
+  club: Club!
+  files: [String!]!
+  type: String
+  status: String!
+  created: DateTime!
+  updated: DateTime
+}
