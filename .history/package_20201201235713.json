@@ -19,10 +19,7 @@
     "nodemon": "^1.18.10"
   },
   "scripts": {
-    "dev": "nodemon --exec babel-node src/server.js",
-    "studio": "npx prisma studio",
-    "prisma-save": "npx prisma migrate save --name init --experimental",
-    "prisma-up": "npx prisma migrate up --experimental",
-    "generate": "npx prisma generate"
+    "dev": "nodemon --exec babel-node src/server.js"
+    "studio": "npx prisma studio"
   }
 }

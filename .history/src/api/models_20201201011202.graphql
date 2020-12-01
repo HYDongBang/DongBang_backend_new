@@ -1,0 +1,101 @@
+type User {
+  id: ID!
+  email: String!
+  encryptedPassword: String
+  userName: String!
+  studentNumber: String 
+  userPhoneNumber: String 
+  university: String 
+  major: String 
+  applications: [Application]
+  rooms: [Room]
+  auth: Boolean
+  fromMessage: [Message]
+  toMessage: [Message]
+  masterClub: Club
+  clubs: [Club]
+}
+
+type Club {
+  id: ID!
+  clubName: String 
+  clubBio: String 
+  description: String 
+  type: String 
+  members: [User] 
+  clubImage: String
+  logoImage: String
+  questions: [Question]
+  applications: [Application]
+  application_description: String 
+  posts: [Post]
+  master: User 
+  clubAddInfo: ClubAddInfo
+}
+
+type ClubAddInfo {
+  id: ID!
+  party: Boolean
+  partyDay: String 
+  clubPhoneNumber: String
+  socialUrl: String
+  isUnion: Boolean
+  numberOfMembers: Int
+  email: String 
+  clubId: Int
+}
+
+type Room {
+  id: ID!
+  participants: [User]
+  messages: [Message]
+}
+
+type Message {
+  id: ID!
+  text: String
+  room: Room
+  createdAt: DateTime 
+  fromId: Int
+  toId: Int
+}
+
+type Option {
+  id: ID!
+  content: String
+  questionId: Int
+}
+
+type Question {
+  id: ID!
+  content: String
+  type: String
+  options: [Option]
+  clubId: Int
+}
+
+type Answer {
+  id: ID!
+  content: String
+  appId: Int
+}
+type Application {
+  id: ID!
+  answer: [Answer]
+  createdAt: DateTime
+  userId: Int
+  clubId: Int
+  
+}
+
+type Post {
+  id: ID!
+  title: String
+  content: String
+  file: String
+  type: String
+  createdAt DateTime 
+  updatedAt DateTime 
+  userId: Int
+  clubId: Int
+}

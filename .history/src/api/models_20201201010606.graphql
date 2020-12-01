@@ -1,0 +1,107 @@
+type User {
+  id: ID!
+  email: String!
+  encryptedPassword: String
+  userName: String!
+  studentNumber: String 
+  userPhoneNumber: String 
+  university: String 
+  major: String 
+  applications: [Application]
+  rooms: [Room]
+  auth: Boolean
+  fromMessage: [Message]
+  toMessage: [Message]
+  masterClub: Club
+  clubs: [Club]
+}
+
+type Club {
+  id: ID!
+  clubName: String 
+  clubBio: String 
+  description: String 
+  type: String 
+  members: [User] 
+  clubImage: String
+  logoImage: String
+  questions: [Question]
+  applications: [Application]
+  application_description: String 
+  posts: [Post]
+  master: User 
+  clubAddInfo: ClubAddInfo
+}
+
+type ClubAddInfo {
+  id: ID!
+  party: Boolean
+  partyDay: String 
+  clubPhoneNumber: String
+  socialUrl: String
+  isUnion: Boolean
+  numberOfMembers: Int
+  email: String 
+  clubId: Int
+}
+
+type Room {
+  id: ID!
+  participants: [User]
+  messages: [Message]
+}
+
+type Message {
+  id: ID!
+  text: String
+  room: Room
+  createdAt: DateTime 
+  fromId: Int
+  toId: Int
+}
+
+type Option {
+  id Int @id @default(autoincrement())
+  content String
+  questionId Int
+}
+
+model Question {
+  id Int @id @default(autoincrement())
+  content String
+  type String
+  options Option[]
+  clubId Int
+  Club Club @relation(fields:[clubId], references:[id])
+}
+
+model Answer {
+  id Int @id @default(autoincrement())
+  content String
+  appId Int
+  Application Application @relation(fields:[appId], references:[id])
+}
+model Application {
+  id Int @id @default(autoincrement())
+  answer Answer[]
+  createdAt DateTime @default(now())
+  userId Int
+  clubId Int
+  User User @relation(fields:[userId], references:[id])
+  Club Club @relation(fields:[clubId], references:[id])
+  
+}
+
+model Post {
+  id Int @id @default(autoincrement())
+  title String
+  content String
+  file String
+  type String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  userId Int
+  clubId Int
+  User User @relation(fields:[userId], references:[id])
+  club Club @relation(fields:[clubId], references:[id])
+}
